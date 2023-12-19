@@ -5,12 +5,12 @@ package com.penyo.tsington.util;
  *
  * @author Penyo
  */
-public enum SQLDBProduct {
+public enum SqlDbProduct {
   POSTGRESQL("org.postgresql.Driver"), MYSQL("com.mysql.cj.jdbc.Driver"), SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver"), ORACLE("oracle.jdbc.driver.OracleDriver");
 
   private final String driverClassName;
 
-  SQLDBProduct(String driverClassName) {
+  SqlDbProduct(String driverClassName) {
     this.driverClassName = driverClassName;
   }
 

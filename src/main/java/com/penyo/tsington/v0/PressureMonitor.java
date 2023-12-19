@@ -1,13 +1,11 @@
 package com.penyo.tsington.v0;
 
-import com.penyo.tsington.cfg.PerformanceConfig;
+import com.penyo.tsington.config.PerformanceConfig;
 
+import java.io.Closeable;
 import java.time.Instant;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * 压力监视器
@@ -18,12 +16,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Penyo
  */
-public class PressureMonitor {
-  /**
-   * 日志发生器
-   */
-  private static final Logger logger = LogManager.getLogger(PressureMonitor.class);
-
+public class PressureMonitor implements Closeable {
   /**
    * 请求记录
    */
@@ -48,8 +41,7 @@ public class PressureMonitor {
           synchronized (this) {
             wait(pc.getScanCycle());
           }
-        } catch (InterruptedException e) {
-          logger.warn(e);
+        } catch (InterruptedException ignored) {
         }
       }
     });
@@ -63,9 +55,7 @@ public class PressureMonitor {
     requests.offer(Instant.now());
   }
 
-  /**
-   * 关闭监视器。
-   */
+  @Override
   public void close() {
     monitor.interrupt();
   }

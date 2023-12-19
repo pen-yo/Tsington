@@ -1,4 +1,4 @@
-package com.penyo.tsington.cfg;
+package com.penyo.tsington.config;
 
 /**
  * 性能配置
@@ -17,15 +17,15 @@ public class PerformanceConfig {
   /**
    * 请求超时时长
    */
-  private int requestTimeout = 3000;
+  private long requestTimeout = 3000L;
   /**
    * 扩张压力
    */
-  private double pressureToExpand = 4;
+  private double pressureToExpand = 4D;
   /**
    * 收缩压力
    */
-  private double pressureToContract = 0.25;
+  private double pressureToContract = 0.25D;
   /**
    * 尺寸变化量
    */
@@ -33,7 +33,7 @@ public class PerformanceConfig {
   /**
    * 扫描周期
    */
-  private long scanCycle = 3000;
+  private long scanCycle = 3000L;
 
   public int getMinConnectionsNum() {
     return minConnectionsNum;
@@ -51,11 +51,11 @@ public class PerformanceConfig {
     this.maxConnectionsNum = maxConnectionsNum;
   }
 
-  public int getRequestTimeout() {
+  public long getRequestTimeout() {
     return requestTimeout;
   }
 
-  public void setRequestTimeout(int requestTimeout) {
+  public void setRequestTimeout(long requestTimeout) {
     this.requestTimeout = requestTimeout;
   }
 

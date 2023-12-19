@@ -1,13 +1,10 @@
 package com.penyo.tsington.util;
 
-import com.penyo.tsington.cfg.UserConfig;
+import com.penyo.tsington.config.UserConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * 驱动代理
@@ -16,18 +13,12 @@ import org.apache.logging.log4j.Logger;
  */
 public class DriverProxy {
   /**
-   * 日志发生器
-   */
-  private static final Logger logger = LogManager.getLogger(DriverProxy.class);
-
-  /**
    * 注册驱动。
    */
-  public static void register(SQLDBProduct prod) {
+  public static void register(String driver) {
     try {
-      Class.forName(prod.getDriverClassName());
-    } catch (ClassNotFoundException e) {
-      logger.error(e);
+      Class.forName(driver);
+    } catch (ClassNotFoundException ignored) {
     }
   }
 
@@ -36,10 +27,9 @@ public class DriverProxy {
    */
   public static Connection getConnection(UserConfig uc) {
     try {
-      return DriverManager.getConnection(uc.getJdbcUrl(), uc.getUsername(), uc.getPassword());
-    } catch (SQLException e) {
-      logger.error(e);
-      return null;
+      return DriverManager.getConnection(uc.url(), uc.username(), uc.password());
+    } catch (SQLException ignored) {
     }
+    return null;
   }
 }

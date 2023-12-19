@@ -1,0 +1,6 @@
+user:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql:///?serverTimezone=UTC
+  username: root
+  password: 1234
+performance:
